@@ -82,6 +82,17 @@ class IntakeTests(unittest.TestCase):
         self.assertEqual(intake.read("community/candidates.json")[0]["status"], "pending")
         self.assertEqual(list((self.root / "assets/memes").glob("*.png")), [])
 
+    def test_reencoded_output_strips_profile_and_exif_metadata(self):
+        original = Image.new("RGB", (4, 3), "red")
+        exif = Image.Exif()
+        exif[0x0131] = "Private fixture metadata"
+        source = io.BytesIO()
+        original.save(source, "PNG", icc_profile=b"Fixture color profile", exif=exif)
+        encoded, _ = intake.raster(source.getvalue())
+        with Image.open(io.BytesIO(encoded)) as clean:
+            self.assertNotIn("icc_profile", clean.info)
+            self.assertNotIn("exif", clean.info)
+
     def test_same_pixels_with_different_metadata_do_not_duplicate_manual_asset(self):
         from PIL.PngImagePlugin import PngInfo
         metadata = PngInfo()

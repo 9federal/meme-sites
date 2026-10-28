@@ -219,6 +219,7 @@ def raster(payload):
                 raise ValueError("Animated or oversized image: leave a link for manual review")
             image.load()
             clean = ImageOps.exif_transpose(image).convert("RGBA")
+            clean.info.clear()
             pixels = hashlib.sha256(f"{clean.width}x{clean.height}:".encode() + clean.tobytes()).hexdigest()
             # Re-encode pixels, stripping active trailers, metadata and embedded instructions.
             output = io.BytesIO()
