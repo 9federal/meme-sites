@@ -4,3 +4,6 @@ __pycache__/
 .env
 .env.*
 node_modules/
+
+community/.intake.lock
+community/last-check.json
