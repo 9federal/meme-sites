@@ -1,0 +1,59 @@
+{
+  "purpose": "Representative manual evaluation cases. Expected outcomes are review criteria, not evidence that a full site run has already passed.",
+  "cases": [
+    {
+      "id": "party-rsvp",
+      "prompt": "Сделай мемный сайт для вечеринки: RSVP, максимум 40 человек, можно плюс-один и отменить ответ.",
+      "should_activate": true,
+      "checks": ["Requests missing date, timezone, location visibility and RSVP details without repeating supplied limits", "Counts people including guests; atomically enforces capacity and releases seats on cancellation", "Tests concurrent requests for the last place"]
+    },
+    {
+      "id": "office-static",
+      "prompt": "Нужен мемный одностраничник для коллег про бесконечные созвоны. Только посмотреть и посмеяться, никаких форм.",
+      "should_activate": true,
+      "checks": ["Asks for context, allowed memes, language and hosting target", "Uses a static page without a database, poll, mandatory CTA or visitor data collection", "Checks readable mobile composition"]
+    },
+    {
+      "id": "poll-hidden-multiselect",
+      "prompt": "Создай мемный сайт-голосовалку: выбрать 1–3 варианта, ответ можно поменять, результаты скрыты до дедлайна.",
+      "should_activate": true,
+      "checks": ["Asks for options, deadline and timezone, audience and visibility of total participation", "Validates choice limits and updates the existing response", "Does not disclose hidden totals via page, API, CSV or cache; uses server time"]
+    },
+    {
+      "id": "poll-invited-named",
+      "prompt": "Сделай мемное именное голосование только для приглашённых коллег, один ответ на человека.",
+      "should_activate": true,
+      "checks": ["Asks how identity and invitations are verified, who may view names and responses, and personal-data retention", "Enforces invitation and ownership on the server rather than relying on a browser token", "Tests unauthorized voting, identity substitution and changes to another participant's response"]
+    },
+    {
+      "id": "support-benchmark",
+      "prompt": "Нужна мемная открытая голосовалка за улучшение общей кухни. 300 рабочих мест — только ориентир, голосовать могут все.",
+      "should_activate": true,
+      "checks": ["Separates the benchmark from a hard cap and verified people", "Uses real shared state and describes browser-level deduplication honestly", "Allows totals above 300 and does not add a meeting or payment"]
+    },
+    {
+      "id": "partial-brief",
+      "prompt": "Сделай мемный сайт для нашей тусовки.",
+      "should_activate": true,
+      "checks": ["Starts with purpose, audience and the main visitor task", "Asks relevant short blocks instead of dumping the full intake", "Does not invent a date, address, contact or RSVP rules"]
+    },
+    {
+      "id": "explicit-hosting-choice",
+      "prompt": "Используй $meme-sites: мемный офисный сайт, только локальная разработка, без Framer и публикации.",
+      "should_activate": true,
+      "checks": ["Respects local-only scope and does not access hosting or create external projects", "Does not require optional skills or accounts", "Calls the result local rather than published"]
+    },
+    {
+      "id": "invitation-copy-only",
+      "prompt": "Напиши короткий смешной текст приглашения на вечеринку в общий чат.",
+      "should_activate": false,
+      "checks": ["Provides invitation text without launching website development or hosting intake"]
+    },
+    {
+      "id": "single-meme-image",
+      "prompt": "Сделай картинку-мем про понедельник.",
+      "should_activate": false,
+      "checks": ["Routes to an appropriate image workflow rather than building a website"]
+    }
+  ]
+}
