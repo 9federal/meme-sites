@@ -17,7 +17,7 @@
       "id": "poll-hidden-multiselect",
       "prompt": "Создай мемный сайт-голосовалку: выбрать 1–3 варианта, ответ можно поменять, результаты скрыты до дедлайна.",
       "should_activate": true,
-      "checks": ["Asks for options, deadline and timezone, audience and visibility of total participation", "Validates choice limits and updates the existing response", "Does not disclose hidden totals via page, API, CSV or cache; uses server time"]
+      "checks": ["Asks for options, deadline and timezone, audience and visibility of total participation", "Validates choice limits and updates the existing response", "Does not disclose hidden totals via page, API, CSV or cache; uses server time", "A delayed read response does not roll back a confirmed save or newer tally"]
     },
     {
       "id": "poll-invited-named",
@@ -29,7 +29,7 @@
       "id": "support-benchmark",
       "prompt": "Нужна мемная открытая голосовалка за улучшение общей кухни. 300 рабочих мест — только ориентир, голосовать могут все.",
       "should_activate": true,
-      "checks": ["Separates the benchmark from a hard cap and verified people", "Uses real shared state and describes browser-level deduplication honestly", "Allows totals above 300 and does not add a meeting or payment"]
+      "checks": ["Separates the benchmark from a hard cap and verified people", "Uses real shared state and describes browser-level deduplication honestly", "Allows totals above 300 and does not add a meeting or payment", "Public results remain readable when browser storage is unavailable"]
     },
     {
       "id": "partial-brief",
